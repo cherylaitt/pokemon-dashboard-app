@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import LoadingSpinner from './LoadingSpinner'
 import styles from './PokemonDetailsModal.module.css'
+import Image from 'next/image'
 
 interface PokemonDetailsModalProps {
   pokemonUrl: string | null
@@ -123,7 +124,7 @@ export default function PokemonDetailsModal({ pokemonUrl, onClose }: PokemonDeta
   }
 
   if (!pokemonUrl) {
-    return null
+    return null;
   }
 
   return (
@@ -154,7 +155,7 @@ export default function PokemonDetailsModal({ pokemonUrl, onClose }: PokemonDeta
           <div className={styles.content}>
             <div className={styles.header}>
               <div className={styles.imageContainer}>
-                <img
+                <Image
                   src={
                     details.sprites.other['official-artwork'].front_default ||
                     details.sprites.other.dream_world.front_default ||
@@ -163,6 +164,8 @@ export default function PokemonDetailsModal({ pokemonUrl, onClose }: PokemonDeta
                   }
                   alt={formatName(details.name)}
                   className={styles.mainImage}
+                  width={100}
+                  height={100}
                 />
               </div>
               <div className={styles.titleSection}>
@@ -239,14 +242,14 @@ export default function PokemonDetailsModal({ pokemonUrl, onClose }: PokemonDeta
               <div className={styles.section}>
                 <h3 className={styles.sectionTitle}>Moves ({details.moves.length})</h3>
                 <div className={styles.movesList}>
-                  {details.moves.slice(0, 20).map((move, index) => (
+                  {details.moves.slice(0, 15).map((move, index) => (
                     <span key={index} className={styles.move}>
                       {formatName(move.move.name)}
                     </span>
                   ))}
                   {details.moves.length > 20 && (
                     <span className={styles.moreMoves}>
-                      +{details.moves.length - 20} more moves
+                      +{details.moves.length - 15} more moves
                     </span>
                   )}
                 </div>

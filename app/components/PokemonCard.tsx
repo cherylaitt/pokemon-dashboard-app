@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from 'react'
 import LoadingSpinner from './LoadingSpinner'
 import styles from './PokemonCard.module.css'
+import Image from 'next/image'
 
 interface PokemonCardProps {
   pokemon: {
@@ -153,10 +154,12 @@ export default function PokemonCard({ pokemon, index, pokemonDetails: providedDe
     <div className={styles.card} onClick={onClick}>
       <div className={styles.imageContainer}>
         {imageUrl ? (
-          <img
+          <Image
             src={imageUrl}
             alt={formatName(details.name)}
             className={styles.image}
+            width={100}
+            height={100}
           />
         ) : (
           <div className={styles.placeholder}>#{details.id}</div>
